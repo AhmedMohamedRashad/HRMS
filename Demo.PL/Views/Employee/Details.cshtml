@@ -1,0 +1,31 @@
+﻿@model EmployeeVM
+
+@{
+    ViewData["Title"] = "Details";
+
+}
+@section BootstrapSelect{
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+}
+
+<div class="block-header">
+    <h2>@Model.Name Details</h2>
+</div>
+
+<form class="form-group" asp-action="Details" asp-controller="Employee">
+
+@{
+    await Html.RenderPartialAsync("~/Views/Partials/Employee/DetailsOrDelete.cshtml");
+}
+
+<center>
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-warning">Return</a>
+    <a asp-controller="Employee" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-primary">Update</a>
+    <a asp-controller="Employee" asp-action="Delete" asp-route-id="@Model.Id"  class="btn btn-danger">Delete</a>
+
+</center>
+
+
+</form>

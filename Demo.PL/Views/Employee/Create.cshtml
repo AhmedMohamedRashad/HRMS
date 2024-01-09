@@ -1,0 +1,85 @@
+﻿@model EmployeeVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section BootstrapSelect{
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/plugins/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" />
+}
+
+<div class="block-header">
+    <h2>Create Employee</h2>
+</div>
+
+<p class="text-danger">@TempData["msg"]</p>
+<form class="form-group" asp-action="Create" asp-controller="Employee" enctype="multipart/form-data">
+
+    <div asp-validation-summary="All" class="text-danger">    </div>
+
+    @{
+        await Html.RenderPartialAsync("~/Views/Partials/Employee/CreateOrUpdate.cshtml");
+    }
+
+    <center>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </center>
+
+</form>
+
+
+@section JqueryValidation{
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/plugins/jqueryui/jquery-ui.min.js"></script>
+
+    <script>
+        $(function () {
+           $("#datepicker").datepicker();
+
+            $("#CountryList").change(function () {
+                $("#CityList").empty();
+                $("#CityList").append("<option>Choose Your City</option>");
+                $("#DistrictId").empty();
+                $("#DistrictId").append("<option>Choose Your District</option>");
+                var countryId = $("#CountryList option:selected").val();
+                $.ajax({
+                    type:"POST",
+                    url: "/Employee/GetCitiesByCountryId",
+                    data: { countryId: countryId },
+                    success:function(res){
+                        $.each(res,function(i,e){
+                            $("#CityList").append("<option value='"+e.Id+"'>"+e.Name+"</option>");
+                        });
+                        $('#CityList').selectpicker('refresh');
+                        $('#DistrictId').selectpicker('refresh');
+
+                    } 
+                });
+
+
+            });
+
+            $("#CityList").change(function () {
+                $("#DistrictId").empty();
+                $("#DistrictId").append("<option>Choose Your District</option>");
+                var cityId = $("#CityList option:selected").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Employee/GetDistrictsByCityId",
+                    data: { cityId: cityId },
+                    success: function (res) {
+                        $.each(res, function (i, e) {
+                            $("#DistrictId").append("<option value='" + e.Id + "'>" + e.Name + "</option>");
+                        });
+                        $('#DistrictId').selectpicker('refresh');
+                    }
+                });
+
+
+            });
+ 
+
+        });
+    </script>
+}

@@ -1,0 +1,26 @@
+﻿@model MailVM
+@{
+    ViewData["Title"] = "Send Email";
+}
+
+<div class="block-header">
+    <h2>Send Email</h2>
+</div>
+<p class="text-danger">@TempData["msg"]</p>
+<form class="form-group" asp-action="Send" asp-controller="Mail" >
+     <div asp-validation-summary="All" class="text-danger">    </div>
+
+    <label asp-for="Title">Email Title</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br />
+    <label asp-for="Message">Email Body</label>
+    <textarea asp-for="Message" rows="5" class="form-control"></textarea>
+    <span asp-validation-for="Message" class="text-danger"></span>
+    <br />
+
+    <center>
+        <input type="submit" value="Send" class="btn btn-primary" />
+    </center>
+
+</form>

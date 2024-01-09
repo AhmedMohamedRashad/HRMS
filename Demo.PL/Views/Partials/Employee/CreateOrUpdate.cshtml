@@ -1,0 +1,82 @@
+﻿@model EmployeeVM
+@inject Demo.BL.Interface.IDepartmentRep department
+@inject Demo.BL.Interface.ICountryRep country
+
+<label asp-for="Name">Employee Name</label>
+<input type="text" asp-for="Name" class="form-control" />
+<span asp-validation-for="Name" class="text-danger"></span>
+<br />
+<label asp-for="Email">Employee Email</label>
+<input type="email" asp-for="Email" class="form-control" />
+<span asp-validation-for="Email" class="text-danger"></span>
+<br />
+<label asp-for="Address">Employee Address</label>
+<input type="text" asp-for="Address" class="form-control" />
+<span asp-validation-for="Address" class="text-danger"></span>
+<br />
+<label asp-for="Salary">Employee Salary</label>
+<input type="number" min="3000" max="50000" asp-for="Salary" class="form-control" />
+<span asp-validation-for="Salary" class="text-danger"></span>
+<br />
+<label asp-for="Notes">Employee Notes</label>
+<textarea asp-for="Notes" rows="4" class="form-control"></textarea>
+<span asp-validation-for="Notes" class="text-danger"></span>
+<br />
+<label asp-for="HireDate">Employee HireDate</label>
+<input type="text" asp-for="HireDate" id="datepicker" class="form-control" autocomplete="off" />
+<span asp-validation-for="HireDate" class="text-danger"></span>
+<br />
+<div class="demo-checkbox">
+    <input type="checkbox" asp-for="IsActive"  />
+    <label asp-for="IsActive">IsActive</label>
+    <span asp-validation-for="IsActive" class="text-danger "></span>
+</div>
+<br />
+
+<select asp-for="DepartmentId">
+    <option>Choose Department</option>
+    @foreach (var item in await department.Get())
+    {
+        <option value="@item.Id">@item.Name</option>
+    }            
+</select>
+<span asp-validation-for="DepartmentId" class="text-danger "></span>
+
+
+
+@*<select asp-for="DepartmentId" asp-items="(SelectList)ViewBag.DepartmentList"  >
+    <option>Choose Department</option>
+</select>
+    <span asp-validation-for="DepartmentId" class="text-danger "></span>
+
+*@
+<br />
+<br />
+<select id="CountryList" >
+    <option>Choose Your Country</option>
+    @foreach (var item in await country.Get())
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
+<br />
+<br />
+<select id="CityList">
+    <option>Choose Your City</option>
+</select>
+<br />
+<br />
+<select asp-for="DistrictId">
+    <option>Choose Your District</option>
+</select>
+
+<br />
+<br />
+<label asp-for="Image">Employee Image</label>
+<input type="file" asp-for="Image" class="form-control" />
+<br />
+<label asp-for="Cv">Employee Cv</label>
+<input type="file" asp-for="Cv" class="form-control" />
+<br />
+
+

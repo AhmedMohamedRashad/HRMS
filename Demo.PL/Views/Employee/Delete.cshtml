@@ -1,0 +1,29 @@
+﻿@model EmployeeVM
+@{
+    ViewData["Title"] = "Delete";
+}
+@section BootstrapSelect{
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+}
+
+<div class="block-header">
+    <h2>@Model.Name Delete</h2>
+</div>
+
+
+<form class="form-group" asp-action="Delete" asp-controller="Employee">
+
+    <input type="hidden" asp-for="Id" />
+
+    @{
+        await Html.RenderPartialAsync("~/Views/Partials/Employee/DetailsOrDelete.cshtml");
+    }
+
+    <center>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-controller="Employee" asp-action="Index"  class="btn btn-warning">Return</a>
+
+    </center>
+
+</form>

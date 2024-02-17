@@ -17,9 +17,8 @@ namespace Demo.BL.Helper
 			{
 				var smtp = new SmtpClient("smtp.gmail.com", 587);
 				smtp.EnableSsl= true;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("ahmedzxc56@gmail.com", "dembgakaafbkkplm");
-				smtp.Send("ahmedzxc56@gmail.com", "ahmedzxc56@gmail.com", mail.Title, mail.Message);
+                smtp.Credentials = new NetworkCredential("ahmedrashad.fcai@gmail.com", "youPassword");
+				smtp.Send( "ahmedrashad.fcai@gmail.com",mail.To , mail.Title, mail.Message);
 				return "Success";
 			}
 			catch (Exception ex )

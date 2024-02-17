@@ -3,12 +3,14 @@ using Demo.BL.Helper;
 using Demo.BL.Interface;
 using Demo.BL.Model;
 using Demo.DAL.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Demo.PL.Controllers
 {
+    [Authorize(Roles ="Admin,User")]
     public class EmployeeController : Controller
     {
 

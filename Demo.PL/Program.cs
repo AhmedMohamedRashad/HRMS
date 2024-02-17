@@ -3,7 +3,10 @@ using Demo.BL.Mapper;
 using Demo.BL.Repository;
 using Demo.DAL.Database;
 using Demo.DAL.Entity;
+using Demo.DAL.Extend;
 using Demo.PL.Language;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +29,9 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson(opt =>
 
 
 var connectionString = builder.Configuration.GetConnectionString("DemoConnection");
-builder.Services.AddDbContext<DemoContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DemoContext>(options => options.UseSqlServer(connectionString,
+            options => options.EnableRetryOnFailure()));
+
 
 builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 
@@ -44,6 +49,45 @@ builder.Services.AddScoped<IDistrictRep, DistrictRep>();
 
 // SingleTone (Take One Instance Shared Between All Users)
 //builder.Services.AddSingleton<IDepartment, DepartmentRep>();
+
+
+
+// Identity Configuration
+
+
+//builder.Services.AddAuthentication().AddIdentityCookies(o =>
+//{
+//    o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Expiration = new TimeSpan(10, 00, 00, 00));
+//});
+
+
+// Generate Token Configuration
+builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<DemoContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+    options =>
+    {
+        options.LoginPath = new PathString("/Account/Login");
+        options.AccessDeniedPath = new PathString("/Account/Login");
+        options.SlidingExpiration = true;
+        
+    });
+
+// Password and User Name Configuration
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    // Default Password settings.
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 0;
+}).AddEntityFrameworkStores<DemoContext>();
 
 
 
@@ -81,7 +125,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

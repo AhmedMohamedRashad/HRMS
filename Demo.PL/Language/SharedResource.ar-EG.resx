@@ -198,6 +198,12 @@
   <data name="Name Required" xml:space="preserve">
     <value>الاسم مطلوب</value>
   </data>
+  <data name="Role" xml:space="preserve">
+    <value>صلاحية</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>صلاحيات</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>حفظ</value>
   </data>
@@ -213,7 +219,19 @@
   <data name="Update" xml:space="preserve">
     <value>تعديل</value>
   </data>
+  <data name="user" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
+  </data>
   <data name="WTE" xml:space="preserve">
     <value>مرحبا بك في جدول الموظفين</value>
+  </data>
+  <data name="WTR" xml:space="preserve">
+    <value>مرحبا بك في جدول الصلاحيات</value>
+  </data>
+  <data name="WTU" xml:space="preserve">
+    <value>مرحبا بك في جدول المستخدمين</value>
   </data>
 </root>

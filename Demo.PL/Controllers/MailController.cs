@@ -1,11 +1,14 @@
 ﻿using Demo.BL.Helper;
 using Demo.BL.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.PL.Controllers
 {
+    [Authorize(Roles ="Admin,User")]
     public class MailController : Controller
     {
+        [HttpGet]
         public IActionResult Send()
         {
             return View();

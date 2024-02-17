@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Demo.BL.Model;
 using Demo.DAL.Entity;
+using Demo.DAL.Extend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,10 @@ namespace Demo.BL.Mapper
 
             CreateMap<District, DistrictVM>();
             CreateMap<DistrictVM, District>();
+
+            CreateMap<ApplicationUser, RegistrationVM>();
+            CreateMap<RegistrationVM, ApplicationUser>();
+
 
         }
     }

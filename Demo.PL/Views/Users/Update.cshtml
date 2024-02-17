@@ -1,0 +1,49 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Update"; 
+}
+@section BootstrapSelect{
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/plugins/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" />
+}
+
+<div class="block-header">
+    <h2>@Model.UserName Update</h2>
+</div>
+
+<p class="text-danger">@TempData["msg"]</p>
+<form class="form-group" asp-action="Update" asp-controller="Users">
+
+    <div asp-validation-summary="All" class="text-danger">    </div>
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="UserName">User Name</label>
+    <input type="text" asp-for="UserName" class="form-control" />
+    <span asp-validation-for="UserName" class="text-danger"></span>
+    <br />
+    <label asp-for="Email">User Email</label>
+    <input type="email" asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+
+
+
+    <center>
+        <input type="submit" value="Update" class="btn btn-primary" />
+        <a asp-controller="Users" asp-action="Index" class="btn btn-warning">Return</a>
+
+    </center>
+
+</form>
+
+@section JqueryValidation{
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/plugins/jqueryui/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+}
+

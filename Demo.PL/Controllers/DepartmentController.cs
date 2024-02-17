@@ -3,11 +3,13 @@ using Demo.BL.Interface;
 using Demo.BL.Model;
 using Demo.BL.Repository;
 using Demo.DAL.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace Demo.PL.Controllers
 {
+    [Authorize(Roles ="Admin , User")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRep department;

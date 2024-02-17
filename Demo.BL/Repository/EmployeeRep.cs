@@ -49,8 +49,8 @@ namespace Demo.BL.Repository
         }
         public async Task Update(Employee obj)
         {
-            db.Entry(obj).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+                db.Entry(obj).State = EntityState.Modified;
+                await db.SaveChangesAsync();
         }
 
 

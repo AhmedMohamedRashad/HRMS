@@ -14,10 +14,10 @@ namespace Demo.BL.Model
         [EmailAddress(ErrorMessage ="Invalid Email")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Password Required")]
-        [MinLength(6,ErrorMessage ="Min length password is 6")]
+        [RegularExpression("^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)(?=.*?[\\W_]).{6,}$", ErrorMessage = " password must contain at least eight characters, at least one number and both lower and uppercase letters and special characters")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Confirm Password Required")]
-        [MinLength(6, ErrorMessage = "Min length password is 6")]
+        [RegularExpression("^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)(?=.*?[\\W_]).{6,}$", ErrorMessage = " password must contain at least eight characters, at least one number and both lower and uppercase letters and special characters")]
         [Compare("Password",ErrorMessage ="password not match")]
         public string ConfirmPassword { get; set; }
         

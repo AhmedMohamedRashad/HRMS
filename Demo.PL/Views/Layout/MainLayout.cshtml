@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject SignInManager<ApplicationUser> signInManager
+
+@{
     var Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
 <!DOCTYPE html>
@@ -35,17 +37,18 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="~/css/themes/all-themes.css" rel="stylesheet" />
-    @if(Culture == "ar-EG"){
+    @if (Culture == "ar-EG")
+    {
         <link href="~/ar.css" rel="stylesheet" />
     }
     else
     {
         <link href="~/en.css" rel="stylesheet" />
     }
-    
+
 </head>
 <body class="theme-red">
-    
+
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -101,7 +104,8 @@
                         </li>
 
                     }
-                    else{
+                    else
+                    {
                         <li>
                             <a class="dropdown-item d-flex justify-content-between"
                            href="@Url.Action("SetLanguage", "Language", new {
@@ -321,8 +325,7 @@
                     <img src="~/images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    <div class="email">@User.Identity.Name</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -332,7 +335,14 @@
                             <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li>
+                                                              
+                                <form asp-controller="Account" asp-action="LogOff">
+                                    
+                                    <input type="submit" value="Sign Out" class="btn btn-danger btn-block" />
+                                    
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -341,6 +351,8 @@
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
                     <li class="header">@SharedLocalizer["MN"]</li>
                     <li class="active">
                         <a href="index.html">
@@ -378,15 +390,45 @@
                             <span>@SharedLocalizer["MC"]</span>
                         </a>
                         <ul class="ml-menu">
-                            <li>
-                                <a asp-controller="#" asp-action="#">@SharedLocalizer["Inbox"]</a>
-                            </li>
+                            
                             <li>
                                 <a asp-controller="Mail" asp-action="Send">@SharedLocalizer["Snm"]</a>
                             </li>
 
                         </ul>
                     </li>
+                        
+                    } 
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin") )
+                    {
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">person</i>
+                                <span>@SharedLocalizer["User"]</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a asp-controller="users" asp-action="Index">@SharedLocalizer["Users"]</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">fingerprint</i>
+                                <span>@SharedLocalizer["Roles"]</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a asp-controller="roles" asp-action="Index">@SharedLocalizer["Roles"]</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    }
+
                 </ul>
             </div>
             <!-- #Menu -->

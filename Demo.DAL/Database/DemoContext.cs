@@ -1,4 +1,6 @@
 ﻿using Demo.DAL.Entity;
+using Demo.DAL.Extend;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace Demo.DAL.Database
 {
-    public class DemoContext : DbContext
+    public class DemoContext : IdentityDbContext<ApplicationUser>
     {
+
 
         public DemoContext(DbContextOptions<DemoContext>opt):base(opt)
         {
@@ -21,5 +24,6 @@ namespace Demo.DAL.Database
         public DbSet<District> District { get; set; }
         public DbSet<Employee> Employee { get; set; }
 
+        
     }
 }

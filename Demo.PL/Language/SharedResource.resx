@@ -198,6 +198,12 @@
   <data name="Name Required" xml:space="preserve">
     <value>Name Required</value>
   </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -213,7 +219,19 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>user</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
   <data name="WTE" xml:space="preserve">
     <value>Welcome To Employee</value>
+  </data>
+  <data name="WTR" xml:space="preserve">
+    <value>Welcome To Roles Table</value>
+  </data>
+  <data name="WTU" xml:space="preserve">
+    <value>Welcome To Users Table</value>
   </data>
 </root>

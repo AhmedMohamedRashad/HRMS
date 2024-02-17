@@ -14,6 +14,8 @@
             <div class="body">
                 <form  asp-controller="Account" asp-action="Registration">
                     <div class="msg">Register a new membership</div>
+                    <p class="text-danger">@TempData["msg"]</p>
+
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="input-group">
                         <span class="input-group-addon">

@@ -14,5 +14,9 @@ namespace Demo.BL.Model
 
         [Required(ErrorMessage = "Message Required")]
         public string Message { get; set; }
+
+        [Required(ErrorMessage = "Message Required")]
+        [EmailAddress]
+        public string To { get; set; }
     }
 }

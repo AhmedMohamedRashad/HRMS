@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\Files\Images\" />
     <Folder Include="wwwroot\Files\Docs\" />
   </ItemGroup>
